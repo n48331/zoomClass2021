@@ -7,9 +7,9 @@ import calendar
 
 
 # id & password (global)
-passw = '057053'
-id = '95576418008kl'
-times = ["22:35", "22:37", "10:00", "11:00", "13:00"]
+passw = '057053kl'
+id = '95576418008'
+times = ["22:40", "09:00", "10:00", "11:00", "13:00"]
 
 # 0-mon,1-tue,2-wed,3-thu,4-fri,5-sat,6-sun
 day = datetime.datetime.today().weekday()
@@ -53,7 +53,7 @@ else:
     print("Started Schedules for {}. 4 classes".format(week))
 
 for x in times:
-    if day == 5:
+    if day == 6:
         exit()
     else:
         try:
