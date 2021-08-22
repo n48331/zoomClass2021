@@ -10,6 +10,13 @@ import calendar
 passw = '057053'
 id = '95576418008'
 
+fivep = [0, 1, 3, 5]
+fourp = [2, 4]
+
+# 0-mon,1-tue,2-wed,3-thu,4-fri,5-sat,6-sun
+day = datetime.datetime.today().weekday()
+print(day)
+
 # main Fuction
 
 
@@ -33,18 +40,16 @@ def zoom(id, passw):
     time.sleep(3)
 
 
-def zoom1():
-    zoom('2345678921', passw)
+week = calendar.day_name[day].upper()
+print("Started Schedules for {}".format(week))
 
-
-print("Started Schedules")
 try:
-    schedule.every().day.at("8:05").do(zoom1)
+    schedule.every().day.at("08:05").do(zoom1)
 except:
     print("Some Error occurred on Class - 1")
 
 try:
-    schedule.every().day.at("9:00").do(zoom1)
+    schedule.every().day.at("09:00").do(zoom1)
 except:
     print("Some Error occurred on Class - 2")
 
@@ -63,11 +68,6 @@ try:
 except:
     print("Some Error occurred on Class - 5")
 
-day = datetime.datetime.today().weekday()
-print(day)
-
-week = calendar.day_name[day]
-print(week)
 
 while True:
     schedule.run_pending()
