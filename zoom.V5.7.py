@@ -8,65 +8,62 @@ import calendar
 
 # id & password (global)
 passw = '057053'
-id = '95576418008'
+id = '95576418008kl'
 
 fivep = [0, 1, 3, 5]
 fourp = [2, 4]
+times = ["22:08", "09:00", "10:00", "11:00", "13:00"]
 
 # 0-mon,1-tue,2-wed,3-thu,4-fri,5-sat,6-sun
 day = datetime.datetime.today().weekday()
-print(day)
+if day == 2 or day == 4:
+    times.pop()
 
 # main Fuction
 
 
 def zoom(id, passw):
-    os.startfile(r"Zoom.lnk")
+    os.startfile(r"assets\Zoom.lnk")
     time.sleep(1)
-    join = pi.locateCenterOnScreen('join.png', confidence=0.8)
+    join = pi.locateCenterOnScreen('assets\icons\join.png', confidence=0.8)
     pi.click(join)
     time.sleep(1)
     pi.write(id, interval=0.02)
     time.sleep(1)
 
-    join2 = pi.locateCenterOnScreen('join2.png', confidence=0.8)
+    join2 = pi.locateCenterOnScreen('assets\icons\join2.PNG', confidence=0.8)
     pi.click(join2)
     time.sleep(2)
     pi.write(passw, interval=0.02)
     time.sleep(1)
 
-    join3 = pi.locateCenterOnScreen('join3.PNG', confidence=0.8)
+    join3 = pi.locateCenterOnScreen('assets\icons\join3.PNG', confidence=0.8)
     pi.click(join3)
     time.sleep(3)
+    print("Done..❌")
+
+
+def zoom1():
+    zoom(id, passw)
 
 
 week = calendar.day_name[day].upper()
-print("Started Schedules for {}".format(week))
+if day == 6:
+    print("Its Holiday, No classes Today, Sleep Well 😃")
+elif day == 2 or day == 4:
+    print("Started Schedules for {}. 5 classes".format(week))
+else:
+    print("Started Schedules for {}. 4 classes".format(week))
 
-try:
-    schedule.every().day.at("08:05").do(zoom1)
-except:
-    print("Some Error occurred on Class - 1")
-
-try:
-    schedule.every().day.at("09:00").do(zoom1)
-except:
-    print("Some Error occurred on Class - 2")
-
-try:
-    schedule.every().day.at("10:00").do(zoom1)
-except:
-    print("Some Error occurred on Class - 3")
-
-try:
-    schedule.every().day.at("11:00").do(zoom1)
-except:
-    print("Some Error occurred on Class - 4")
-
-try:
-    schedule.every().day.at("13:00").do(zoom1)
-except:
-    print("Some Error occurred on Class - 5")
+for x in times:
+    if day == 5:
+        exit()
+    else:
+        try:
+            schedule.every().day.at(x).do(zoom1)
+            print("class for today at {} scheduled...✅".format(x))
+        except:
+            print("Some Error occurred on Class - {}".format(index(x)))
 
 
 while True:
