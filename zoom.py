@@ -7,14 +7,20 @@ import calendar
 
 
 # id & password (global)
-id = input("Enter ID Default '95576588008'") or '95576588008'
-passw = input("Enter Password Default '057897'") or '057897'
+passw = '057053'
+id = '95576418008'
 times = ["08:05", "09:00", "10:00", "11:00", "13:00"]
 
 # 0-mon,1-tue,2-wed,3-thu,4-fri,5-sat,6-sun
 day = datetime.datetime.today().weekday()
-if day == 2 or day == 4:
+
+
+if day == 0 or day == 1 or day == 3 or day == 5:
     times.pop()
+    if day == 0:
+        times.pop(1)
+elif day == 2:
+    times.pop(1)
 
 # main Fuction
 
@@ -26,13 +32,13 @@ def zoom(id, passw):
     pi.click(join)
     time.sleep(1)
     pi.write(id, interval=0.05)
-    time.sleep(1)
+    time.sleep(2)
 
     join2 = pi.locateCenterOnScreen('assets\icons\join2.PNG', confidence=0.8)
     pi.click(join2)
     time.sleep(2)
     pi.write(passw, interval=0.05)
-    time.sleep(1)
+    time.sleep(2)
 
     join3 = pi.locateCenterOnScreen('assets\icons\join3.PNG', confidence=0.8)
     pi.click(join3)
