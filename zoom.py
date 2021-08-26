@@ -67,7 +67,7 @@ for x in times:
             schedule.every().day.at(x).do(zoom1)
             print("class for today at {} scheduled...✅".format(x))
         except:
-            print("Some Error occurred on Class - {}".format(index(x)))
+            print("Some Error occurred on Class - {}".format(x))
 
 
 while True:

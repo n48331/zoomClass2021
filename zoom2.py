@@ -66,7 +66,7 @@ elif day != 6:
                 print("class for today at {} scheduled...✅".format(times[i]))
             except:
                 print(
-                    "Some Error occurred on Class - {}".format(index(times[i])))
+                    "Some Error occurred on Class - {}".format(i))
 
 while True:
     schedule.run_pending()
