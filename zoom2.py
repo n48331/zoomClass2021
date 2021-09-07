@@ -1,4 +1,6 @@
 import time
+import sys
+import signal
 import schedule
 import os
 import pyautogui as pi
@@ -7,10 +9,10 @@ import calendar
 from keyboard import press
 
 # id & password (global)
-passw = '057053'
+passw = '05705'
 id = '95576418008'
-times = ["08:05", "09:00", "10:00", "11:00", "12:00"]
 
+times = ["08:05", "09:00", "10:00", "11:00", "12:00"]
 tt = [[1, 0, 1, 1, 0],
       [1, 1, 1, 1, 0],
       [1, 0, 1, 1, 1],
@@ -24,10 +26,16 @@ print('id : '+id, 'password : '+passw)
 # 0-mon,1-tue,2-wed,3-thu,4-fri,5-sat,6-sun
 day = datetime.datetime.today().weekday()
 
+# sys.exit()
+
 # main Fuction
 
 
+cr = 0
+
+
 def zoom(id, passw):
+    global cr
     t = time.localtime()
     current_time = time.strftime("%H:%M:%S", t)
     try:
@@ -42,6 +50,10 @@ def zoom(id, passw):
         pi.write(passw, interval=0.05)
         press('enter')
         print("Class Started from {}".format(current_time))
+        cr += 1
+        if cr == count:
+            print('All Done,No more Classes')
+            os.kill(os.getpid(), signal.SIGTERM)
     except:
         print("Not Done.Some ERROR occurred ! ! !")
 
@@ -68,7 +80,8 @@ elif day != 6:
                 print(
                     "Some Error occurred on Class - {}".format(i))
 
+
 while True:
     schedule.run_pending()
     time.sleep(1)
-schedule.CancelJob()
+    schedule.CancelJob()
